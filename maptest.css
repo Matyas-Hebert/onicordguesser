@@ -1,0 +1,8 @@
+#map-viewport,
+#map-viewport canvas,
+.openseadragon-container,
+.openseadragon-canvas,
+.openseadragon-canvas canvas {
+    image-rendering: crisp-edges !important;
+    image-rendering: pixelated !important;
+}

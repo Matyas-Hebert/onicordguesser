@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Cubemap Viewer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/openseadragon@4.1/build/openseadragon/openseadragon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/openseadragon-svg-overlay@0.0.5/openseadragon-svg-overlay.js"></script>
+</head>
+<body>
+
+    <div id="startscreen">
+        <div class="panel">
+            <h1>OniCordGuesser</h1>
+            <div class="field-row">
+                <label for="rounds">POČET KOL <span id="rounds-value">5</span></label>
+                <input id="rounds" type="range" min="1" max="20" value="5">
+            </div>
+            <div class="field-row">
+                <label for="time">ČAS NA KOLO <span id="time-value">3:00</span></label>
+                <input id="time" type="range" min="10" max="630" value="180">
+            </div>
+            <div class="field-row">
+                <label for="seed">seed</label>
+                <input id="seed" type="text" value="12345">
+            </div>
+            <div class="buttons">
+                <button id="easy" type="button" onclick="selectDifficulty(1)">SNADNÁ</button>
+                <button class="notchosen" id="normal" type="button" onclick="selectDifficulty(2)">TĚŽKÁ</button>
+                <button class="notchosen" id="hard" type="button" onclick="selectDifficulty(3)">PEKELNÁ</button>
+                <button class="notchosen" id="imp" type="button" onclick="selectDifficulty(4)">NE</button>
+            </div>
+            <div class="buttons">
+                <button id="randomize-seed" type="button" onclick="randomizeSeed()">NÁHODNÝ SEED</button>
+                <button id="play-button" type="button" onclick="startGame()">HRÁT</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game">
+        <div id="menu">
+            <button class="menu-toggle" id="menuBtn" aria-label="Toggle menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+        </div>
+        <div id="photosphere-container"></div>
+            <div id="map-viewport">
+                <button id="guess-button" class="guess-btn">HÁDAT</button>
+                <div id="info-on-a-map">
+                    <div class="stat-group">
+                        <span class="stat-label">Vzdálenost</span>
+                        <span class="stat-value" id="distance-val">500 bloků</span>
+                    </div>
+                    <div class="stat-group">
+                        <span class="stat-label">Skóre</span>
+                        <span class="stat-value" id="score-val">250</span>
+                    </div>
+                </div>
+            </div>
+        <div id="game-info">
+            <div class="info-block">
+                <span class="info-label">Kolo</span>
+                <span id="current-round" class="info-value">pr4</span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">Skóre</span>
+                <span id="total-score" class="info-value">0</span>
+            </div>
+            <div class="info-block" id="time-info-block">
+                <span class="info-label">Čas</span>
+                <span id="remaining-time" class="info-value">3:00</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three/build/three.module.js",
+                "@photo-sphere-viewer/core": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.module.js",
+                "@photo-sphere-viewer/cubemap-adapter": "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/cubemap-adapter/index.module.js"
+            }
+        }
+    </script>
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/labels.js"></script>
+    <script src="scripts/map.js"></script>
+    <script src="scripts/units.js"></script>
+    <script src="scripts/panoramasetup.js"></script>
+    <script src="scripts/guess.js"></script>
+    <script src="scripts/setup.js"></script>
+    <script src="scripts/timer.js"></script>
+    <script type="module" src="viewer.js"></script>
+    <script type="module" src="game.js"></script>
+</body>
+</html>

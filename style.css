@@ -1,0 +1,356 @@
+#map-viewport {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 35vw;
+    height: 35vh;
+    background-color: #333;
+    border: 2px solid white;
+    overflow: hidden; 
+    z-index: 100;
+}
+
+#map-viewport.fullscreen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    bottom: auto;
+    right: auto;
+    left: 0;
+    top: 0;
+    border: none;
+    z-index: 999;
+}
+
+#map-zoom-text,
+.map-text-overlay {
+    color: white;
+    font-size: 0.95rem;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 6px 10px;
+    pointer-events: none;
+    z-index: 105;
+    white-space: nowrap;
+}
+
+#panorama-info {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.65);
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    border-radius: 4px;
+    z-index: 210;
+    pointer-events: none;
+    text-align: left;
+}
+
+/* Guess button placed inside the map viewport (bottom-right) */
+.guess-btn {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    padding: 8px 10px;
+    background: #4f8cff;
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 110;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#menu {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 1200; /* Keeps it above overlays and the info panel */
+}
+
+.menu-toggle {
+    width: 5rem;
+    height: 5rem;
+    background: rgba(30, 31, 34, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+}
+
+.menu-bar {
+    width: 2rem;
+    height: 0.2rem;
+    background-color: #f8fafc;
+}
+
+#info-on-a-map {
+    position: absolute;
+    bottom: 24px;                  /* Float it slightly off the bottom edge */
+    left: 50%;
+    transform: translateX(-50%);   /* Center it perfectly horizontally */
+    width: calc(100% - 48px);      /* Give it clean margins on the sides */
+    max-width: 600px;              /* Stop it from stretching too wide on large screens */
+    
+    /* Modern translucent dark glass look */
+    background: rgba(30, 31, 34, 0.85); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 24px;
+    z-index: 1100;                 /* Push it above map controls if needed */
+    
+    /* Flexbox layout to split data into columns cleanly */
+    display: none;                 /* Kept as none for your JS toggle */
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Container for each stat block */
+#info-on-a-map .stat-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Small, muted uppercase label descriptor */
+#info-on-a-map .stat-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #94a3b8;               /* Slate gray secondary text */
+    text-transform: uppercase;
+}
+
+/* Large, crisp numerical value */
+#info-on-a-map .stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.guess-btn:disabled,
+#guess-button:disabled,
+.disabled {
+    background: #7b8fa7;
+    color: #e4e7eb;
+    cursor: default;
+    opacity: 0.75;
+}
+
+.map-pin {
+    width: 12px;
+    height: 12px;
+    background: #ff4d4d;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.correct-pin {
+    width: 12px;
+    height: 12px;
+    background: rgba(80, 255, 120, 0.9);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(80,255,120,0.8);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+#guess-line {
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+}
+
+#map-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: center center;
+}
+
+body, html { 
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#photosphere-container { 
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
+#game {
+    position: relative;
+}
+
+#game-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 16px;
+    background: rgba(24, 38, 59, 0.95);
+    border: 1px solid #2c3a57;
+    color: white;
+    font-size: 0.95rem;
+    z-index: 150;
+}
+
+#game-info .info-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+}
+
+#game-info .info-label {
+    opacity: 0.8;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+#game-info .info-value {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+#startscreen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #10141d;
+    color: white;
+    z-index: 200;
+}
+
+#startscreen .panel {
+    width: min(520px, calc(100% - 40px));
+    padding: 36px;
+    background: #18263b;
+    border: 1px solid #2c3a57;
+    text-align: center;
+}
+
+#startscreen h1 {
+    margin: 0 0 24px;
+    font-size: 2.2rem;
+}
+
+#startscreen label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0 8px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    opacity: 0.85;
+    text-align: left;
+}
+
+#startscreen label span {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+#startscreen input[type="range"] {
+    width: 100%;
+    margin-top: 8px;
+}
+
+#startscreen input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #2c3a57;
+    background: #0f1729;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+#startscreen .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    justify-content: center;
+    flex-wrap: no-wrap;
+}
+
+#startscreen button {
+    flex: 1 1 140px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+#startscreen button#play-button {
+    background: #4f8cff;
+    color: white;
+}
+
+#startscreen button#randomize-seed {
+    background: #18263b;
+    color: white;
+    border: 1px solid #2c3a57;
+}
+
+#easy {
+    background-color: lime;
+}
+
+#normal {
+    background-color: orange;
+}
+
+#hard {
+    background-color: darkred;
+    color: white;
+}
+
+#imp {
+    background-image: url("background.jpg");
+    color: white;
+    background-position: bottom center;
+}
+
+#easy.notchosen, #normal.notchosen, #hard.notchosen, #imp.notchosen {
+    background-color: rgba(105, 88, 88, 0.5);
+    background-image: none;
+    color: white;
+}
+
+#startscreen .field-row {
+    text-align: left;
+    margin-bottom: 12px;
+}
