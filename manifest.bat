@@ -11,6 +11,8 @@ for /d %%i in (panoramas\*) do (
     <nul set /p ="  "panoramas/!folder!"" >> panoramas.json
 )
 
+python analyzelocations2.py
+
 echo. >> panoramas.json
 echo ] >> panoramas.json
 echo panoramas.json generated successfully!

@@ -1,6 +1,6 @@
 import os
 import json
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from math import sqrt as sqrt
 
 class Photosphere:
@@ -98,7 +98,7 @@ for i in photospheres:
     col = "blue"
     #""i.x >= 200 and i.x <= 600 and i.z <= 4600 and i.z >= 4000""
     if(True):
-        col = colors[i.date]
+        #col = colors[i.date]
         #print(i.weight)
         if (i.weight < minweight and i.weight > 0):
             minweight = i.weight
@@ -107,19 +107,11 @@ for i in photospheres:
             print(i.x, i.z, "NOT IMPORTANT", i.file)
         totalweight += i.weight
         totalphotos+=1
-        plt.plot(i.x, i.z, 'o', ms=5, alpha=i.weight*0.5, color=col)
-    # col = i%cols
-    # row = i//cols
-    # axes[row, col].plot(xpoints[i][0:-n], zpoints[i][0:-n], 'o', ms=5, alpha=0.3, color="blue")
-    # axes[row, col].plot(xpoints[i][-n:], zpoints[i][-n:], 'o', ms=5, alpha=0.3, color="red")
-    # axes[row, col].invert_yaxis()
-    # axes[row, col].set_title(names[i]+" ("+str(len(xpoints[i]))+")")
-    # axes[row, col].axis('equal')
-    # #plt.plot([0]*235, ypoints, 'o', ms=5, alpha=0.3)
+        #plt.plot(i.x, i.z, 'o', ms=5, alpha=i.weight*0.5, color=col)
 
 print("TOTAL WEIGHT: ", totalweight)
 print("PHOTOSPHERES: ", totalphotos)
 print("RAREST PHOTOSPHERE: ", minweight)
 print("IMPOSSIBLE PHOTOSPHERES: ", zerocount)
-plt.gca().invert_yaxis()
-plt.show()
+#plt.gca().invert_yaxis()
+#plt.show()

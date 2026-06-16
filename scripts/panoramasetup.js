@@ -42,61 +42,67 @@ function chooseWeightedPanorama(items, round = 1, seed = '') {
     return items[items.length - 1];
 }
 
-async function getPanoramaWeights(folders) {
-    const allPanoramas = [];
+async function getPanoramaWeights() {
+    // const allPanoramas = [];
     
-    let totalfolders = folders.length;
-    // Load all metadata
-    let i = 0;
-    for (const folderHref of folders) {
-        i++;
-        console.log("getting weights: "+i+"/"+totalfolders);
-        try {
-            const metaResponse = await fetch(`./${folderHref}/metadata.json`);
-            if (metaResponse.ok) {
-                const metadata = await metaResponse.json();
-                allPanoramas.push({
-                    name: folderHref,
-                    X: metadata.X,
-                    Y: metadata.Y,
-                    Z: metadata.Z,
-                    date: metadata.Date,
-                    weight: 1
-                });
-            }
-        } catch (e) {
-            console.error(`Failed to fetch metadata for ${folderHref}:`, e);
-        }
-    }
+    // let totalfolders = folders.length;
+    // // Load all metadata
+    // let i = 0;
+    // for (const folderHref of folders) {
+    //     i++;
+    //     console.log("getting weights: "+i+"/"+totalfolders);
+    //     try {
+    //         const metaResponse = await fetch(`./${folderHref}/metadata.json`);
+    //         if (metaResponse.ok) {
+    //             const metadata = await metaResponse.json();
+    //             allPanoramas.push({
+    //                 name: folderHref,
+    //                 X: metadata.X,
+    //                 Y: metadata.Y,
+    //                 Z: metadata.Z,
+    //                 date: metadata.Date,
+    //                 weight: 1
+    //             });
+    //         }
+    //     } catch (e) {
+    //         console.error(`Failed to fetch metadata for ${folderHref}:`, e);
+    //     }
+    // }
     
-    // Calculate weights based on proximity (from analyzelocations.py algorithm)
-    const processed = [];
+    // // Calculate weights based on proximity (from analyzelocations.py algorithm)
+    // const processed = [];
     
-    for (const photosphere of allPanoramas) {
-        for (const i of processed) {
-            const currentday = (i.date === photosphere.date);
+    // for (const photosphere of allPanoramas) {
+    //     for (const i of processed) {
+    //         const currentday = (i.date === photosphere.date);
             
-            // Calculate distance
-            const xd = Math.pow(photosphere.X - i.X, 2);
-            const zd = Math.pow(photosphere.Z - i.Z, 2);
-            const vmc = 2;
-            const dist = Math.sqrt(Math.pow(Math.sqrt(xd + zd), 2) + Math.pow(vmc * (photosphere.Y - i.Y), 2));
+    //         // Calculate distance
+    //         const xd = Math.pow(photosphere.X - i.X, 2);
+    //         const zd = Math.pow(photosphere.Z - i.Z, 2);
+    //         const vmc = 2;
+    //         const dist = Math.sqrt(Math.pow(Math.sqrt(xd + zd), 2) + Math.pow(vmc * (photosphere.Y - i.Y), 2));
             
-            let mult = 1;
-            if (dist < 20) {
-                mult = Math.max(0, (dist - 5) / 15);
-            }
+    //         let mult = 1;
+    //         if (dist < 20) {
+    //             mult = Math.max(0, (dist - 5) / 15);
+    //         }
             
-            if (currentday) {
-                photosphere.weight *= Math.sqrt(mult);
-                i.weight *= Math.sqrt(mult);
-            } else {
-                i.weight *= mult;
-            }
-        }
+    //         if (currentday) {
+    //             photosphere.weight *= Math.sqrt(mult);
+    //             i.weight *= Math.sqrt(mult);
+    //         } else {
+    //             i.weight *= mult;
+    //         }
+    //     }
         
-        processed.push(photosphere);
-    }
+    //     processed.push(photosphere);
+    // }
+
+    // console.log(processed[0].name);
+
+    let loaded = await fetch(`./weights.json`);
+    let data = await loaded.json();
+    console.log(data[0].name);
     
-    return processed;
+    return data;
 }

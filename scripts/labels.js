@@ -13,11 +13,17 @@ async function setUpLabels() {
         text: labelsJSONData.Text
     }));
 
+    console.log('created labels const');
+
     setMapOverlayLabels(labels);
+
+    console.log('map overlay lables setup');
 }
 
 function setMapOverlayLabels(labels) {
     removeAllMapTextOverlays();
+
+    console.log('removed map text overlay');
 
     labelsData = labels.map(labelData => ({
          data: {
@@ -30,7 +36,11 @@ function setMapOverlayLabels(labels) {
          added: false
     }));
 
+    console.log('mapped');
+
     updateMapTextOverlays();
+
+    console.log('overlay updated');
 };
 
 function updateMapTextOverlays() {
