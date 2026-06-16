@@ -1,20 +1,15 @@
 async function listPanoramaFolders() {
-    const response = await fetch('panoramas/');
-    const text = await response.text();
-    
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, 'text/html');
-    const links = doc.querySelectorAll('a');
-    
-    const folders = [];
-    links.forEach((link) => {
-        const href = link.getAttribute('href');
-        if (href && href !== '/' && href !== '/panoramas') {
-            folders.push(href);
-        }
-    });
-    
-    return folders;
+    try {
+        // Fetch the automated list file instead of the directory index
+        const response = await fetch('./panoramas.json');
+        if (!response.ok) throw new Error("Could not load panoramas.json");
+        
+        const folders = await response.json();
+        return folders;
+    } catch (e) {
+        console.error("Failed to load panorama folder list:", e);
+        return [];
+    }
 }
 
 function loadNewPhotosphere() {
@@ -51,7 +46,7 @@ async function getPanoramaWeights(folders) {
     // Load all metadata
     for (const folderHref of folders) {
         try {
-            const metaResponse = await fetch(`${folderHref}/metadata.json`);
+            const metaResponse = await fetch(`./${folderHref}/metadata.json`);
             if (metaResponse.ok) {
                 const metadata = await metaResponse.json();
                 allPanoramas.push({

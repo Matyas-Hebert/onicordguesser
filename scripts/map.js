@@ -2,7 +2,7 @@ function createMap(){
     return OpenSeadragon({
         id: 'map-viewport',
         prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/images/',
-        tileSources: 'tiling/my_tiles.dzi',
+        tileSources: './tiling/my_tiles.dzi',
         showNavigationControl: false,
         gestureSettingsMouse: {
             clickToZoom: false
