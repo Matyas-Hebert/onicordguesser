@@ -114,8 +114,6 @@
     max-width: 600px;              /* Stop it from stretching too wide on large screens */
     /* Modern translucent dark glass look */
     background: rgba(30, 31, 34, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 16px 24px;
