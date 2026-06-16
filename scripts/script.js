@@ -59,11 +59,20 @@ async function preloadGame() {
         { map: { x: 0.2939210488433349, y: 0.38430105280063487 }, real: { x: 1443, y: 4366 } }
     );
 
+    console.log("updated transform");
+
     const folders = await window.listPanoramaFolders();
+    console.log("listed folders");
     const weights = await window.getPanoramaWeights(folders);
+    console.log("got panorama weights");
     window.game.setWeights(weights);
 
+    console.log("set weights");
+
     loadNewPhotosphere();
+
+    console.log("loaded photosphere");
+
     window.game.incrementRound();
     playButton.classList.remove("disabled");
     playButton.disabled = false;

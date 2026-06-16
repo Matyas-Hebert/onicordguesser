@@ -14,7 +14,9 @@ async function listPanoramaFolders() {
 
 function loadNewPhotosphere() {
     const randomPanorama = window.chooseWeightedPanorama(window.game.weights, window.game.currentRound, window.game.seed);
+    console.log("selected random panorama");
     window.loadPanorama(randomPanorama.name, randomPanorama, window.game.difficulty);
+    console.log("loaded pano");
     window.game.currentPan = randomPanorama;
 }
 
@@ -43,8 +45,12 @@ function chooseWeightedPanorama(items, round = 1, seed = '') {
 async function getPanoramaWeights(folders) {
     const allPanoramas = [];
     
+    let totalfolders = folders.length;
     // Load all metadata
+    let i = 0;
     for (const folderHref of folders) {
+        i++;
+        console.log("getting weights: "+i+"/"+totalfolders);
         try {
             const metaResponse = await fetch(`./${folderHref}/metadata.json`);
             if (metaResponse.ok) {

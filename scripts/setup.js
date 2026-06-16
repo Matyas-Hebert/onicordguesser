@@ -93,4 +93,6 @@ function selectDifficulty(diff){
     if (diff == 4){
         i.classList = [];
     }
+
+    window.updaterestrictions(diff);
 }

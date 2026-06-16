@@ -81,6 +81,8 @@ window.loadPanorama = function(path, info, diff) {
         viewer.destroy();
     }
 
+    console.log("destroyed viewer");
+
     if (diff == 1){
         viewer = new Viewer({
             container: document.querySelector('#photosphere-container'),
@@ -96,6 +98,7 @@ window.loadPanorama = function(path, info, diff) {
             defaultZoomLvl: 0,
             navbar: ['zoom', 'move', 'fullscreen']
         });
+        console.log("created viewer");
     }
     else{
         viewer = new Viewer({
@@ -112,10 +115,13 @@ window.loadPanorama = function(path, info, diff) {
             defaultZoomLvl: 0,
             navbar: false
         });
+        console.log("created viewer");
     }
 
     window.currentPanoramaInfo = info || null;
     window.updatePanoramaInfo(info);
+
+    console.log("updated info");
 
     console.log("the difficulty is: ", diff);
     if (diff == 1){
@@ -138,4 +144,29 @@ window.loadPanorama = function(path, info, diff) {
         window.randomizePanoramaZoom(100, 100);
         window.setPanoramaInteractions(false);
     }
+
+    console.log("set up done");
 };
+
+window.updaterestrictions = function(diff) {
+    if (diff == 1){
+        window.setPanoramaInteractions(true);
+    }
+    if (diff == 2){
+        window.randomizePanoramaPitch();
+        window.randomizePanoramaYaw();
+        window.setPanoramaInteractions(false);
+    }
+    if (diff == 3){
+        window.randomizePanoramaPitch();
+        window.randomizePanoramaYaw();
+        window.randomizePanoramaZoom(30, 100);
+        window.setPanoramaInteractions(false);
+    }
+    if (diff == 4){
+        window.randomizePanoramaPitch();
+        window.randomizePanoramaYaw();
+        window.randomizePanoramaZoom(100, 100);
+        window.setPanoramaInteractions(false);
+    }
+}
