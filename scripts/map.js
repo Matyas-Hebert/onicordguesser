@@ -38,6 +38,8 @@ function setupMapHandlers(map){
         const distance = getDistance(window.game.mousedownpos, e.position);
         if (distance < 8) {
             const viewportPoint = map.viewport.viewerElementToViewportCoordinates(e.position);
+            console.log(viewportPoint);
+            console.log(translateMapToReal({x: viewportPoint.x, z: viewportPoint.y}));
             removePins(map);
             if (window.game.yourGuesses.length >= window.game.currentRound){
                 window.game.yourGuesses[window.game.currentRound - 1] = { x: viewportPoint.x, z: viewportPoint.y };

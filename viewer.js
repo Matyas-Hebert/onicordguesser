@@ -23,7 +23,7 @@ window.updatePanoramaInfo = function(info) {
     const weightText = info.weight != null ? Number(info.weight).toFixed(2) : 'N/A';
     const dateText = info.date != null ? info.date : 'unknown';
     el.innerHTML = `<strong>weight:</strong> ${weightText}<br><strong>date:</strong> ${dateText}`;
-    el.style.display = 'block';
+    el.style.display = 'none';
 };
 
 window.setPanoramaInteractions = function(enabled) {

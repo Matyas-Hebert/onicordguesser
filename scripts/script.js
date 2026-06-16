@@ -55,15 +55,13 @@ async function preloadGame() {
     setGuessButtonEnabled(false);
     
     transform = setMapReferences(
-        { map: { x: 0.9276796019399111, y: 0.08891071533588515 }, real: { x: 11176.81590701724, y: -170.26402619122928 } },
-        { map: { x: 0.2939210488433349, y: 0.38430105280063487 }, real: { x: 1443, y: 4366 } }
+        { map: { x: 0.21393933973244336, y: 0.37461242208719364 }, real: { x: 324, y: 4410 } },
+        { map: { x: 0.8977183734726149, y: 0.08606494079958535 }, real: { x: 11176, y: -170 } }
     );
 
     console.log("updated transform");
 
-    const folders = await window.listPanoramaFolders();
-    console.log("listed folders");
-    const weights = await window.getPanoramaWeights(folders);
+    const weights = await window.getPanoramaWeights();
     console.log("got panorama weights");
     window.game.setWeights(weights);
 

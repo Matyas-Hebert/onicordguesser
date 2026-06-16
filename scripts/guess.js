@@ -57,7 +57,7 @@ function guessbtnclick(){
         else{
             addPin(map, {x: mapCoords.x, y: mapCoords.z}, "green");
             let y = window.game.yourGuesses[window.game.currentRound-1];
-            console.log("y:", y);
+            console.log("y:", y, "c:", pan.X, pan.Z);
             drawLine(mapCoords, y);
             window.game.timetaken += totals-timeLeft;
             guessBtn.innerText = "DALŠÍ";
