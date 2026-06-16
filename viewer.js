@@ -83,40 +83,21 @@ window.loadPanorama = function(path, info, diff) {
 
     console.log("destroyed viewer");
 
-    if (diff == 1){
-        viewer = new Viewer({
-            container: document.querySelector('#photosphere-container'),
-            adapter: CubemapAdapter,
-            panorama: {
-                left:   path+'\\WEST.jpg',
-                front:  path+'\\NORTH.jpg',
-                right:  path+'\\EAST.jpg',
-                back:   path+'\\SOUTH.jpg',
-                top:    path+'\\UP.jpg',
-                bottom: path+'\\DOWN.jpg'
-            },
-            defaultZoomLvl: 0,
-            navbar: ['zoom', 'move', 'fullscreen']
-        });
-        console.log("created viewer");
-    }
-    else{
-        viewer = new Viewer({
-            container: document.querySelector('#photosphere-container'),
-            adapter: CubemapAdapter,
-            panorama: {
-                left:   path+'\\WEST.jpg',
-                front:  path+'\\NORTH.jpg',
-                right:  path+'\\EAST.jpg',
-                back:   path+'\\SOUTH.jpg',
-                top:    path+'\\UP.jpg',
-                bottom: path+'\\DOWN.jpg'
-            },
-            defaultZoomLvl: 0,
-            navbar: false
-        });
-        console.log("created viewer");
-    }
+    viewer = new Viewer({
+        container: document.querySelector('#photosphere-container'),
+        adapter: CubemapAdapter,
+        panorama: {
+            left:   path+'\\WEST.jpg',
+            front:  path+'\\NORTH.jpg',
+            right:  path+'\\EAST.jpg',
+            back:   path+'\\SOUTH.jpg',
+            top:    path+'\\UP.jpg',
+            bottom: path+'\\DOWN.jpg'
+        },
+        defaultZoomLvl: 0,
+        navbar: false
+    });
+    console.log("created viewer");
 
     window.currentPanoramaInfo = info || null;
     window.updatePanoramaInfo(info);
