@@ -107,7 +107,7 @@
 
 #info-on-a-map {
     position: absolute;
-    bottom: 24px;                  /* Float it slightly off the bottom edge */
+    bottom: 10vh;                  /* Float it slightly off the bottom edge */
     left: 50%;
     transform: translateX(-50%);   /* Center it perfectly horizontally */
     width: calc(100% - 48px);      /* Give it clean margins on the sides */
