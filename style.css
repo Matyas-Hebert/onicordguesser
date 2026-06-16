@@ -10,6 +10,19 @@
     z-index: 100;
 }
 
+/* On screens smaller than 768px (phones and small tablets) */
+@media (max-width: 768px) {
+    #map-viewport {
+        width: 100%;
+        height: 30vh; /* Optional: adjust height so it doesn't cover too much mobile screen */
+        bottom: 0;    /* Snap it completely to the bottom edges */
+        right: 0;
+        border-left: none;   /* Remove unnecessary borders on full-width mobile */
+        border-right: none;
+        border-bottom: none;
+    }
+}
+
 #map-viewport.fullscreen {
     position: fixed;
     inset: 0;
