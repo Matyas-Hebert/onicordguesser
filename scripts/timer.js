@@ -21,6 +21,7 @@ function startTimer(totalSeconds) {
         if (timeLeft <= 0) {
             clearInterval(timerId);
             window.game.yourGuesses.push({x: NaN, z: NaN});
+            setGuessButtonEnabled(true);      
             guessbtnclick();
             console.log("Time is completely up!");
         }
